@@ -1,6 +1,5 @@
 import 'package:flutter/widgets.dart';
 import 'package:tabiri/src/api/api.dart';
-import 'package:zanmutm_pos_client/src/db/db.dart';
 
 class AppFetcher extends StatefulWidget {
   final String? api;
@@ -28,19 +27,6 @@ class _AppFetcherState extends State<AppFetcher> {
     setState(() {
       _isLoading = true;
     });
-    try {
-      var db = await DbProvider().database;
-      List<Map<String, dynamic>> result = await db.query(widget.table!, where: 'isActive=?', whereArgs: [1]);
-      setState(() {
-        _isLoading = false;
-        _items = result;
-      });
-    } catch(e) {
-      debugPrint(e.toString());
-      setState(() {
-        _isLoading = false;
-      });
-    }
   }
 
   loadFromApi() async {

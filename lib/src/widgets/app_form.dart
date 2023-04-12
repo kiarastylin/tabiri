@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:zanmutm_pos_client/src/widgets/app_input_hidden.dart';
+import 'package:tabiri/src/widgets/app_input_hidden.dart';
 
 /// App form as FormBuilder wrapper  that provide by default id and uuid as hidden fields
 /// this allow automatic setting and retrieving this fields automatically during update
