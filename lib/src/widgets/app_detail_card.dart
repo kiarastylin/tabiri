@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:zanmutm_pos_client/src/models/format_type.dart';
-import 'package:zanmutm_pos_client/src/utils/helpers.dart';
+import 'package:tabiri/src/models/format_type.dart';
+import 'package:tabiri/src/utils/helpers.dart';
 
 class AppDetailColumn {
   final String header;
