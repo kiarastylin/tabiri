@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:tabiri/src/providers/app_state_provider.dart';
+import 'package:tabiri/src/routes/app_routes.dart';
 
 class AppDrawer extends StatefulWidget {
   const AppDrawer({super.key});

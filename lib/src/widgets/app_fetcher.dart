@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:zanmutm_pos_client/src/api/api.dart';
+import 'package:tabiri/src/api/api.dart';
 import 'package:zanmutm_pos_client/src/db/db.dart';
 
 class AppFetcher extends StatefulWidget {
