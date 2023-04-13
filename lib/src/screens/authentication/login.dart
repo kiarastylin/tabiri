@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:tabiri/routes/route-names.dart';
+import 'package:tabiri/src/service/service.dart';
 import 'package:tabiri/src/widgets/app_base_screen.dart';
 import 'package:tabiri/src/widgets/app_button.dart';
 import 'package:tabiri/src/widgets/app_card.dart';
@@ -16,6 +17,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final ApiService _apiService = ApiService();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   bool dont_show_password = true;
@@ -111,7 +113,16 @@ class _LoginState extends State<Login> {
                           bottom: 0,
                           child: AppButton(
                             label: 'LOGIN',
-                            onPress: () => null,
+                            onPress: () async {
+                              try {
+                                final response = await _apiService.login(
+                                    email.text.toString(),
+                                    password.text.toString());
+                                // handle successful login response
+                              } catch (e) {
+                                // handle login error
+                              }
+                            },
                             bcolor: HexColor('#e7d4d3'),
                             borderRadius: 20,
                             textColor: Colors.black,
@@ -121,7 +132,8 @@ class _LoginState extends State<Login> {
                     )),
               ),
               GestureDetector(
-                onTap: () => Navigator.pushNamed(context, RouteNames.registration),
+                onTap: () =>
+                    Navigator.pushNamed(context, RouteNames.registration),
                 child: Padding(
                   padding: const EdgeInsets.only(left: 120),
                   child: AppText(
