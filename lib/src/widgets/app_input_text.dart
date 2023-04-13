@@ -1,39 +1,62 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class AppInputText extends StatelessWidget {
-  final String fieldName;
-  final String displayValue;
-  final String label;
-  final List<String? Function(String?)> validators;
-  final bool obscureText;
-  final Widget? suffixIcon;
-
-  const AppInputText(
-      {super.key,
-      required this.fieldName,
-      this.displayValue = 'name',
-      required this.label,
-      this.validators = const [],
-      this.obscureText = false, this.suffixIcon});
+  final TextEditingController? textfieldcontroller;
+  final String? label;
+  final Icon? icon;
+  final IconButton? suffixicon;
+  final bool obscure;
+  final Function? validate;
+  AppInputText({
+    Key? key,
+    required this.textfieldcontroller,
+    this.icon,
+    this.suffixicon,
+    required this.label,
+    required this.obscure,
+    this.validate,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return FormBuilderField<String>(
-        name: fieldName,
-        builder: ((field) {
-          return TextFormField(
-
-              decoration: InputDecoration(
-                suffixIcon: suffixIcon,
-                label: Text(label),
-                errorText: field.errorText,
-              ),
-              initialValue: field.value,
-              obscureText: obscureText,
-              onChanged: (value) {
-                field.didChange(value);
-              });
-        }));
+    return TextFormField(
+      obscureText: obscure,
+      obscuringCharacter: '*',
+      controller: textfieldcontroller,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+        label: Container(
+          color: Colors.white,
+          child: AppText(
+            txt: label,
+            size: 15,
+            color: Colors.black,
+          ),
+        ),
+        filled: true,
+        fillColor: Colors.white,
+        disabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20.0),
+          borderSide: BorderSide(color: HexColor('#000000')),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20.0),
+          borderSide: BorderSide(color: HexColor('#000000')),
+        ),
+        prefixIcon: icon,
+        suffixIcon: suffixicon,
+      ),
+      validator: (value) {
+        if (value!.isNotEmpty) {
+          return null;
+        } else if (value.isEmpty) {
+          return  "THis field cannot be empty";
+          ;
+        }
+      },
+    );
   }
 }
