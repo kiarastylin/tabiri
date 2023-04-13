@@ -34,7 +34,7 @@ class AppInputText extends StatelessWidget {
           borderRadius: BorderRadius.circular(20.0),
         ),
         label: Container(
-          color: Colors.white,
+          color: HexColor('#e7d4d3'),
           child: AppText(
             txt: label,
             size: 15,

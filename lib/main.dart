@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
-import 'package:tabiri/src/screens/splash.dart';
+import 'package:tabiri/routes/routes.dart';
+import 'package:tabiri/routes/route-names.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,6 +23,8 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) =>  MaterialApp(
+    initialRoute: RouteNames.splash,
+      routes: routes,
       builder: (context, widget) => ResponsiveWrapper.builder(
             ClampingScrollWrapper.builder(context, widget!),
             breakpoints: const [
@@ -43,6 +46,5 @@ class MyApp extends StatelessWidget {
           visualDensity: VisualDensity.adaptivePlatformDensity,
            colorScheme: ColorScheme.fromSwatch(
             primarySwatch: Colors.red,
-            ).copyWith(background: Colors.red.shade900)),
-      home: Splash());
+            ).copyWith(background: Colors.red.shade900)),);
 }

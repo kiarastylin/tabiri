@@ -119,12 +119,15 @@ class _LoginState extends State<Login> {
                       ],
                     )),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 120),
-                child: AppText(
-                  size: 15,
-                  txt: 'Not a member? Create Account',
-                  color: Colors.white,
+              GestureDetector(
+                onTap: () => Navigator,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 120),
+                  child: AppText(
+                    size: 15,
+                    txt: 'Not a member? Create Account',
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ],
