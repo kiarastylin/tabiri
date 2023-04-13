@@ -29,14 +29,19 @@ class _SplashState extends State<Splash> {
       if (username == null && status == null) {
         Navigator.of(context)
             .pushReplacement(MaterialPageRoute(builder: (context) => Login()));
-      } else if (username != null && (status == 'client' || status == 'Community Based Mobilizers' || status == 'admin' || status == 'super-admin') && language != null) {
-        Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => Login()));
+      } else if (username != null &&
+          (status == 'client' ||
+              status == 'Community Based Mobilizers' ||
+              status == 'admin' ||
+              status == 'super-admin') &&
+          language != null) {
+        Navigator.of(context)
+            .pushReplacement(MaterialPageRoute(builder: (context) => Login()));
       } else if (username != null &&
           status == 'Health Care Providers' &&
           language != null) {
-        Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => Login()));
+        Navigator.of(context)
+            .pushReplacement(MaterialPageRoute(builder: (context) => Login()));
       }
     });
   }
@@ -57,12 +62,12 @@ class _SplashState extends State<Splash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: HexColor('#ffffff'),
+      backgroundColor: HexColor('#B22121'),
       body: Center(
-          child: SpinKitCircle(
-        // duration: const Duration(seconds: 3),
-        size: 70,
-        color: HexColor('#742B90'),
+          child: SpinKitPumpingHeart(
+        duration: const Duration(seconds: 3),
+        size: 100,
+        color: HexColor('#000000'),
       )),
     );
   }

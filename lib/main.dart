@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
 import 'package:tabiri/src/screens/splash.dart';
@@ -41,6 +40,9 @@ class MyApp extends StatelessWidget {
           highlightColor: Colors.red.shade900,
           splashColor: Colors.red.shade900,
           primaryColor: Colors.red.shade700,
-          visualDensity: VisualDensity.adaptivePlatformDensity, colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.amber).copyWith(background: Colors.red.shade900)),
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+           colorScheme: ColorScheme.fromSwatch(
+            primarySwatch: Colors.red,
+            ).copyWith(background: Colors.red.shade900)),
       home: Splash());
 }

@@ -4,7 +4,8 @@ class AppContainer extends StatelessWidget {
   final Widget child;
   final double? width;
   final double? height;
-  const AppContainer({Key? key, required this.child, this.width, this.height})
+  final double bottom;
+  const AppContainer({Key? key, required this.child, this.width, this.height, required this.bottom})
       : super(key: key);
 
   @override
@@ -13,7 +14,7 @@ class AppContainer extends StatelessWidget {
       width: width,
       height: height,
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
+        padding:  EdgeInsets.fromLTRB(16, 0, 16, bottom),
         child: child,
       ),
     );

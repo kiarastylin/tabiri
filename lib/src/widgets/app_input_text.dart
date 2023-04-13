@@ -6,6 +6,7 @@ class AppInputText extends StatelessWidget {
   final TextEditingController? textfieldcontroller;
   final String? label;
   final Icon? icon;
+  final Color? fillcolor;
   final IconButton? suffixicon;
   final bool obscure;
   final Function? validate;
@@ -14,6 +15,7 @@ class AppInputText extends StatelessWidget {
     Key? key,
     required this.textfieldcontroller,
     required this.isemail,
+    required this.fillcolor,
     this.icon,
     this.suffixicon,
     required this.label,
@@ -40,7 +42,7 @@ class AppInputText extends StatelessWidget {
           ),
         ),
         filled: true,
-        fillColor: Colors.white,
+        fillColor: fillcolor,
         disabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20.0),
           borderSide: BorderSide(color: HexColor('#000000')),

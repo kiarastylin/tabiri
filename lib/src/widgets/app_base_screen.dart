@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class AppBaseScreen extends StatelessWidget {
   final Widget child;
@@ -19,7 +20,7 @@ class AppBaseScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: HexColor('B22121'),
       appBar: appBar,
       body: Stack(
         alignment: AlignmentDirectional.center,
@@ -28,8 +29,7 @@ class AppBaseScreen extends StatelessWidget {
             padding: padding ?? const EdgeInsets.all(16.0),
             child: child,
           ),
-          if(isLoading == true)
-          const CircularProgressIndicator()
+          if (isLoading == true) const CircularProgressIndicator()
         ],
       ),
       floatingActionButton: floatingAction,
