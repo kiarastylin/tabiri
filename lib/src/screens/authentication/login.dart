@@ -30,7 +30,7 @@ class _LoginState extends State<Login> {
                       Icons.mail,
                       color: Colors.black,
                     ),
-                    label: 'Email',
+                    label: 'Email', obscure: false,
                   )),
               Container(
                   height: 55,

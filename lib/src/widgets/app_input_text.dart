@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:tabiri/src/widgets/app_text.dart';
 
 class AppInputText extends StatelessWidget {
   final TextEditingController? textfieldcontroller;
@@ -8,9 +9,11 @@ class AppInputText extends StatelessWidget {
   final IconButton? suffixicon;
   final bool obscure;
   final Function? validate;
+  final bool isemail;
   AppInputText({
     Key? key,
     required this.textfieldcontroller,
+    required this.isemail,
     this.icon,
     this.suffixicon,
     required this.label,
@@ -53,7 +56,7 @@ class AppInputText extends StatelessWidget {
         if (value!.isNotEmpty) {
           return null;
         } else if (value.isEmpty) {
-          return  "THis field cannot be empty";
+          return "THis field cannot be empty";
           ;
         }
       },
