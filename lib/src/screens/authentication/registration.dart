@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:tabiri/routes/route-names.dart';
 import 'package:tabiri/src/widgets/app_base_screen.dart';
 import 'package:tabiri/src/widgets/app_button.dart';
 import 'package:tabiri/src/widgets/app_card.dart';
@@ -15,8 +16,10 @@ class Registration extends StatefulWidget {
 }
 
 class _RegistrationState extends State<Registration> {
-  TextEditingController username = TextEditingController();
+  TextEditingController fullName = TextEditingController();
+  TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+  TextEditingController rpassword = TextEditingController();
   bool dont_show_password = true;
   final _formKey = GlobalKey<FormState>();
   @override
@@ -44,7 +47,7 @@ class _RegistrationState extends State<Registration> {
               Padding(
                 padding: const EdgeInsets.only(right: 250),
                 child: AppText(
-                  txt: 'LOGIN',
+                  txt: 'SIGN UP',
                   size: 20,
                   color: Colors.white,
                 ),
@@ -63,7 +66,21 @@ class _RegistrationState extends State<Registration> {
                             width: 340,
                             bottom: 24,
                             child: AppInputText(
-                              textfieldcontroller: password,
+                              textfieldcontroller: fullName,
+                              icon: Icon(
+                                Icons.mail,
+                                color: Colors.black,
+                              ),
+                              label: 'Full Name',
+                              obscure: false,
+                              isemail: false,
+                              fillcolor: HexColor('e7d4d3'),
+                            )),
+                        AppContainer(
+                            width: 340,
+                            bottom: 24,
+                            child: AppInputText(
+                              textfieldcontroller: email,
                               icon: Icon(
                                 Icons.mail,
                                 color: Colors.black,
@@ -75,7 +92,7 @@ class _RegistrationState extends State<Registration> {
                             )),
                         AppContainer(
                             width: 340,
-                            bottom: 0,
+                            bottom: 24,
                             child: AppInputText(
                               textfieldcontroller: password,
                               icon: Icon(
@@ -94,22 +111,39 @@ class _RegistrationState extends State<Registration> {
                               isemail: false,
                               fillcolor: HexColor('e7d4d3'),
                             )),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 150),
-                          child: AppText(
-                            txt: 'Forgot Password?',
-                            size: 15,
-                            color: Colors.black,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
+                        AppContainer(
+                            width: 340,
+                            bottom: 24,
+                            child: AppInputText(
+                              onChange: (p0) {
+                                if (p0 != password.text) {
+                                  return "Passwords do not match";
+                                } else {
+                                  return null;
+                                }
+                              },
+                              textfieldcontroller: rpassword,
+                              icon: Icon(
+                                Icons.lock,
+                                color: Colors.black,
+                              ),
+                              label: 'Password',
+                              obscure: dont_show_password,
+                              suffixicon: IconButton(
+                                  onPressed: (() {
+                                    setState(() {
+                                      dont_show_password = !dont_show_password;
+                                    });
+                                  }),
+                                  icon: Icon(Icons.remove_red_eye)),
+                              isemail: false,
+                              fillcolor: HexColor('e7d4d3'),
+                            )),
                         AppContainer(
                           width: 140,
                           bottom: 0,
                           child: AppButton(
-                            label: 'LOGIN',
+                            label: 'SIGN UP',
                             onPress: () => null,
                             bcolor: HexColor('#e7d4d3'),
                             borderRadius: 20,
@@ -119,12 +153,15 @@ class _RegistrationState extends State<Registration> {
                       ],
                     )),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 120),
-                child: AppText(
-                  size: 15,
-                  txt: 'Not a member? Create Account',
-                  color: Colors.white,
+              GestureDetector(
+                onTap: () => Navigator.pushNamed(context, RouteNames.login),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 120),
+                  child: AppText(
+                    size: 15,
+                    txt: 'Already have an account? Login',
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ],

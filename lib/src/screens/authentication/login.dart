@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:tabiri/routes/route-names.dart';
 import 'package:tabiri/src/widgets/app_base_screen.dart';
 import 'package:tabiri/src/widgets/app_button.dart';
 import 'package:tabiri/src/widgets/app_card.dart';
@@ -15,7 +16,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  TextEditingController username = TextEditingController();
+  TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   bool dont_show_password = true;
   final _formKey = GlobalKey<FormState>();
@@ -63,7 +64,7 @@ class _LoginState extends State<Login> {
                             width: 340,
                             bottom: 24,
                             child: AppInputText(
-                              textfieldcontroller: password,
+                              textfieldcontroller: email,
                               icon: Icon(
                                 Icons.mail,
                                 color: Colors.black,
@@ -120,7 +121,7 @@ class _LoginState extends State<Login> {
                     )),
               ),
               GestureDetector(
-                onTap: () => Navigator,
+                onTap: () => Navigator.pushNamed(context, RouteNames.registration),
                 child: Padding(
                   padding: const EdgeInsets.only(left: 120),
                   child: AppText(

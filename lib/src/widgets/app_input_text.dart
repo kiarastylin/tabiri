@@ -10,6 +10,7 @@ class AppInputText extends StatelessWidget {
   final IconButton? suffixicon;
   final bool obscure;
   final Function? validate;
+  final Function(String)? onChange;
   final bool isemail;
   AppInputText({
     Key? key,
@@ -18,6 +19,7 @@ class AppInputText extends StatelessWidget {
     required this.fillcolor,
     this.icon,
     this.suffixicon,
+    this.onChange,
     required this.label,
     required this.obscure,
     this.validate,
@@ -26,6 +28,7 @@ class AppInputText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onChanged: onChange,
       obscureText: obscure,
       obscuringCharacter: '*',
       controller: textfieldcontroller,
@@ -55,13 +58,16 @@ class AppInputText extends StatelessWidget {
         suffixIcon: suffixicon,
       ),
       validator: (value) {
+        RegExp regex = RegExp(
+                        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~.]).{8,}$');
         if (isemail) {
           if (value!.isNotEmpty) {
             return null;
           } else if (value.isEmpty) {
             return "THis field cannot be empty";
-            ;
-          }
+          } else if (!regex.hasMatch(value)) {
+                      return 'Password should contain \n -at least one upper case \n -at least one lower case \n -at least one digit \n -at least one Special character \n -Must be at least 8 characters in length';
+                    }
         } else {
           if (value!.isNotEmpty) {
             return null;
