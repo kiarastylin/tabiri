@@ -53,11 +53,20 @@ class AppInputText extends StatelessWidget {
         suffixIcon: suffixicon,
       ),
       validator: (value) {
-        if (value!.isNotEmpty) {
-          return null;
-        } else if (value.isEmpty) {
-          return "THis field cannot be empty";
-          ;
+        if (isemail) {
+          if (value!.isNotEmpty) {
+            return null;
+          } else if (value.isEmpty) {
+            return "THis field cannot be empty";
+            ;
+          }
+        } else {
+          if (value!.isNotEmpty) {
+            return null;
+          } else if (value.isEmpty) {
+            return "THis field cannot be empty";
+            ;
+          }
         }
       },
     );

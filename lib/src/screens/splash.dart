@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tabiri/src/screens/authentication/login.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
@@ -30,12 +31,12 @@ class _SplashState extends State<Splash> {
             .pushReplacement(MaterialPageRoute(builder: (context) => Login()));
       } else if (username != null && (status == 'client' || status == 'Community Based Mobilizers' || status == 'admin' || status == 'super-admin') && language != null) {
         Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => Homepage('')));
+            MaterialPageRoute(builder: (context) => Login()));
       } else if (username != null &&
           status == 'Health Care Providers' &&
           language != null) {
         Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => Homepage_hcp('')));
+            MaterialPageRoute(builder: (context) => Login()));
       }
     });
   }

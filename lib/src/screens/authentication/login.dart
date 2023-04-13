@@ -30,7 +30,7 @@ class _LoginState extends State<Login> {
                       Icons.mail,
                       color: Colors.black,
                     ),
-                    label: 'Email', obscure: false,
+                    label: 'Email', obscure: false, isemail: true,
                   )),
               Container(
                   height: 55,
@@ -49,7 +49,7 @@ class _LoginState extends State<Login> {
                             dont_show_password = !dont_show_password;
                           });
                         }),
-                        icon: Icon(Icons.remove_red_eye)),
+                        icon: Icon(Icons.remove_red_eye)), isemail: false,
                   )),
             ],
           )),
