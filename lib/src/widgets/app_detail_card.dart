@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:tabiri/src/models/format_type.dart';
-import 'package:tabiri/src/utils/helpers.dart';
 
 class AppDetailColumn {
   final String header;
   final dynamic value;
-  final FormatType? format;
 
   AppDetailColumn({
     required this.header,
     required this.value,
-    this.format,
   });
 }
 
@@ -93,11 +89,6 @@ class AppDetailCard extends StatelessWidget {
                             child: Text(
                           col.header,
                           style: headerStyle,
-                        )),
-                        SizedBox(
-                            child: Text(
-                          formatValue(col.format, col.value),
-                          style: cellStyle,
                         )),
                       ],
                     ),

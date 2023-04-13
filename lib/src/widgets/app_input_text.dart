@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:form_builder_validators/form_builder_validators.dart';
 
 class AppInputText extends StatelessWidget {
   final String fieldName;
@@ -22,7 +21,6 @@ class AppInputText extends StatelessWidget {
   Widget build(BuildContext context) {
     return FormBuilderField<String>(
         name: fieldName,
-        validator: FormBuilderValidators.compose(validators),
         builder: ((field) {
           return TextFormField(
 

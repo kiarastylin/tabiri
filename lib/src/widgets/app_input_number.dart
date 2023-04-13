@@ -2,9 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:zanmutm_pos_client/src/utils/app_number_formatter.dart';
-import 'package:zanmutm_pos_client/src/utils/helpers.dart';
+import 'package:tabiri/src/utils/app_number_formatter.dart';
 
 class AppInputNumber extends StatelessWidget {
   final String name;
@@ -37,7 +35,6 @@ class AppInputNumber extends StatelessWidget {
   Widget build(BuildContext context) {
     return FormBuilderField<double>(
         name: name,
-        validator: FormBuilderValidators.compose(validators),
         builder: ((field) {
           return TextFormField(
             textAlign: TextAlign.end,
@@ -49,7 +46,7 @@ class AppInputNumber extends StatelessWidget {
                 errorText: field.errorText,
               ),
               initialValue:
-                  (currency.format(field.value ?? initialValue ?? 0.0)),
+                  ('0.0'),
               keyboardType: TextInputType.number,
               onChanged: (value) {
                 field.didChange(value.isNotEmpty ? _toDouble(value) : 0.00);

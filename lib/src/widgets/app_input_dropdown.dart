@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:form_builder_validators/form_builder_validators.dart';
 
 class AppInputDropDown<T extends dynamic> extends StatelessWidget {
   final List<Map<String, dynamic>> items;
@@ -25,7 +24,6 @@ class AppInputDropDown<T extends dynamic> extends StatelessWidget {
   Widget build(BuildContext context) {
     return FormBuilderField<T>(
         name: name,
-        validator: FormBuilderValidators.compose(validators),
         builder: ((field) {
           return DropdownButtonFormField<T>(
             value: field.value,

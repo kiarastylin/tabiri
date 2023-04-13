@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:zanmutm_pos_client/src/models/user.dart';
-import 'package:zanmutm_pos_client/src/providers/app_state_provider.dart';
-import 'package:zanmutm_pos_client/src/providers/cart_provider.dart';
-import 'package:zanmutm_pos_client/src/providers/tab_provider.dart';
-import 'package:zanmutm_pos_client/src/routes/app_routes.dart';
-import 'package:zanmutm_pos_client/src/routes/app_tab_item.dart';
-import 'package:zanmutm_pos_client/src/widgets/app_drawer.dart';
+import 'package:tabiri/src/models/user.dart';
+import 'package:tabiri/src/providers/app_state_provider.dart';
+import 'package:tabiri/src/providers/cart_provider.dart';
+import 'package:tabiri/src/providers/tab_provider.dart';
+import 'package:tabiri/src/routes/app_routes.dart';
+import 'package:tabiri/src/routes/app_tab_item.dart';
+import 'package:tabiri/src/widgets/app_drawer.dart';
 
 /// This widget a wrapper for tabs
 /// that can be applied to all routed pages
@@ -23,11 +23,9 @@ class AppTabNavigationShell extends StatefulWidget {
 }
 
 class _AppTabNavigationShellState extends State<AppTabNavigationShell> {
-  late AppLocalizations? language;
 
   @override
   void didChangeDependencies() {
-    language = AppLocalizations.of(context);
     super.didChangeDependencies();
   }
 
