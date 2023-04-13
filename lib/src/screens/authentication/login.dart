@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:tabiri/routes/route-names.dart';
-import 'package:tabiri/src/service/service.dart';
+import 'package:tabiri/src/service/login.dart';
 import 'package:tabiri/src/widgets/app_base_screen.dart';
 import 'package:tabiri/src/widgets/app_button.dart';
 import 'package:tabiri/src/widgets/app_card.dart';
@@ -116,11 +116,18 @@ class _LoginState extends State<Login> {
                             onPress: () async {
                               try {
                                 final response = await _apiService.login(
+                                    context,
                                     email.text.toString(),
                                     password.text.toString());
                                 // handle successful login response
                               } catch (e) {
                                 // handle login error
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(e.toString()),
+                                    duration: Duration(seconds: 3),
+                                  ),
+                                );
                               }
                             },
                             bcolor: HexColor('#e7d4d3'),
