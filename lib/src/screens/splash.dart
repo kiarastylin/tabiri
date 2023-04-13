@@ -3,11 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:wgnrr/authentication/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:wgnrr/models/client/home.dart';
-import 'package:wgnrr/models/health_care_provider/home.dart';
-import 'package:wgnrr/utils/routes/language.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
@@ -29,10 +25,7 @@ class _SplashState extends State<Splash> {
   _navigatortohome() async {
     await getValidationData().whenComplete(() async {
       await Future.delayed(Duration(seconds: 1), () {});
-      if (language == null && username == null && status == null) {
-        Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => Language()));
-      } else if (username == null && language != null && status == null) {
+      if (username == null && status == null) {
         Navigator.of(context)
             .pushReplacement(MaterialPageRoute(builder: (context) => Login()));
       } else if (username != null && (status == 'client' || status == 'Community Based Mobilizers' || status == 'admin' || status == 'super-admin') && language != null) {
