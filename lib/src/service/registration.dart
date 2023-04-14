@@ -11,9 +11,11 @@ class registrationService {
   static String baseUrl = dotenv.env['API_SERVER'] ?? 'http://noapi';
   Api api = Api();
 
-  Future<void> login(BuildContext context, String email, String password) async {
+  Future<void> registration(BuildContext context, String email, String password, String region, String fullname) async {
     Map<String, dynamic> data = {
       'email': email,
+      'fullname': fullname,
+      'region': region,
       'password': password,
     };
     try {

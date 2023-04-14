@@ -20,6 +20,7 @@ class _RegistrationState extends State<Registration> {
   final registrationService _apiService = registrationService();
   TextEditingController fullName = TextEditingController();
   TextEditingController email = TextEditingController();
+  TextEditingController region = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController rpassword = TextEditingController();
   bool dont_show_password = true;
@@ -145,7 +146,7 @@ class _RegistrationState extends State<Registration> {
                             width: 340,
                             bottom: 0,
                             child: AppInputText(
-                              textfieldcontroller: email,
+                              textfieldcontroller: region,
                               icon: Icon(
                                 Icons.mail,
                                 color: Colors.black,
@@ -160,7 +161,26 @@ class _RegistrationState extends State<Registration> {
                           bottom: 24,
                           child: AppButton(
                             label: 'SIGN UP',
-                            onPress: () => null,
+                            onPress: () async{
+                              try {
+                                final response = await _apiService.registration(
+                                    context,
+                                    email.text.toString(),
+                                    password.text.toString(),
+                                    fullName.text.toString(),
+                                    region.text.toString()
+                                    );
+                                // handle successful login response
+                              } catch (e) {
+                                // handle login error
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(e.toString()),
+                                    duration: Duration(seconds: 3),
+                                  ),
+                                );
+                              }
+                            },
                             bcolor: HexColor('#e7d4d3'),
                             borderRadius: 20,
                             textColor: Colors.black,
