@@ -7,7 +7,7 @@ import 'package:tabiri/routes/route-names.dart';
 
 import '../connection/dio/api.dart';
 
-class loginService {
+class registrationService {
   static String baseUrl = dotenv.env['API_SERVER'] ?? 'http://noapi';
   Api api = Api();
 

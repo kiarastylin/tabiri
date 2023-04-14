@@ -22,15 +22,17 @@ class AppBaseScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: HexColor('B22121'),
       appBar: appBar,
-      body: Stack(
-        alignment: AlignmentDirectional.center,
-        children: [
-          Padding(
-            padding: padding ?? const EdgeInsets.all(16.0),
-            child: child,
-          ),
-          if (isLoading == true) const CircularProgressIndicator()
-        ],
+      body: SingleChildScrollView(
+        child: Stack(
+          alignment: AlignmentDirectional.center,
+          children: [
+            Padding(
+              padding: padding ?? const EdgeInsets.all(16.0),
+              child: child,
+            ),
+            if (isLoading == true) const CircularProgressIndicator()
+          ],
+        ),
       ),
       floatingActionButton: floatingAction,
     );

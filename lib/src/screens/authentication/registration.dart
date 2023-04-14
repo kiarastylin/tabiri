@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:tabiri/routes/route-names.dart';
+import 'package:tabiri/src/service/registration.dart';
 import 'package:tabiri/src/widgets/app_base_screen.dart';
 import 'package:tabiri/src/widgets/app_button.dart';
 import 'package:tabiri/src/widgets/app_card.dart';
@@ -16,6 +17,7 @@ class Registration extends StatefulWidget {
 }
 
 class _RegistrationState extends State<Registration> {
+  final registrationService _apiService = registrationService();
   TextEditingController fullName = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
@@ -30,7 +32,7 @@ class _RegistrationState extends State<Registration> {
           child: Column(
             children: [
               SizedBox(
-                height: 50,
+                height: 20,
               ),
               AppText(
                 size: 20,
@@ -127,7 +129,7 @@ class _RegistrationState extends State<Registration> {
                                 Icons.lock,
                                 color: Colors.black,
                               ),
-                              label: 'Password',
+                              label: 'Re-enter Password',
                               obscure: dont_show_password,
                               suffixicon: IconButton(
                                   onPressed: (() {
@@ -140,8 +142,22 @@ class _RegistrationState extends State<Registration> {
                               fillcolor: HexColor('e7d4d3'),
                             )),
                         AppContainer(
+                            width: 340,
+                            bottom: 0,
+                            child: AppInputText(
+                              textfieldcontroller: email,
+                              icon: Icon(
+                                Icons.mail,
+                                color: Colors.black,
+                              ),
+                              label: 'Region of Residence',
+                              obscure: false,
+                              isemail: false,
+                              fillcolor: HexColor('e7d4d3'),
+                            )),
+                        AppContainer(
                           width: 140,
-                          bottom: 0,
+                          bottom: 24,
                           child: AppButton(
                             label: 'SIGN UP',
                             onPress: () => null,
