@@ -7,6 +7,7 @@ import 'package:tabiri/src/widgets/app_button.dart';
 import 'package:tabiri/src/widgets/app_card.dart';
 import 'package:tabiri/src/widgets/app_container.dart';
 import 'package:tabiri/src/widgets/app_input_text.dart';
+import 'package:tabiri/src/widgets/app_snackbar.dart';
 import 'package:tabiri/src/widgets/app_text.dart';
 
 class Registration extends StatefulWidget {
@@ -161,24 +162,19 @@ class _RegistrationState extends State<Registration> {
                           bottom: 24,
                           child: AppButton(
                             label: 'SIGN UP',
-                            onPress: () async{
+                            onPress: () async {
                               try {
                                 final response = await _apiService.registration(
                                     context,
                                     email.text,
                                     password.text,
                                     fullName.text,
-                                    region.text
-                                    );
-                                // handle successful login response
+                                    region.text);
+                                    AppSnackbar(isError: false, response: response.toString(),).show(context);                                // handle successful login response
+                                Navigator.pushNamedAndRemoveUntil(
+                                    context, RouteNames.login, (_) => false);
                               } catch (e) {
-                                // handle login error
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(e.toString()),
-                                    duration: Duration(seconds: 3),
-                                  ),
-                                );
+                                AppSnackbar(isError: false, response: e.toString(),).show(context);
                               }
                             },
                             bcolor: HexColor('#e7d4d3'),

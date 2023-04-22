@@ -8,7 +8,7 @@ class registrationService {
   static String baseUrl = dotenv.env['API_SERVER'] ?? 'http://noapi';
   Api api = Api();
 
-  Future<void> registration(BuildContext context, String email, String password,
+  Future registration(BuildContext context, String email, String password,
       String fullname, String region) async {
     Map<String, dynamic> data = {
       'email': email.toString(),
@@ -17,6 +17,6 @@ class registrationService {
       'password': password.toString(),
     };
     final response = await api.post('registration.php', data);
-    Navigator.pushNamedAndRemoveUntil(context, RouteNames.login, (_) => false);
+    return response;
   }
 }

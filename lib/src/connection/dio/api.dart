@@ -11,7 +11,7 @@ class Api {
       final response = await http.head(Uri.parse(baseUrl));
       return response.statusCode == 200;
     } catch (e) {
-      return false;
+     throw Exception("Check your internet connection");
     }
   }
 
