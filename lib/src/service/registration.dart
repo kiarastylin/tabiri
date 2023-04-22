@@ -1,5 +1,4 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:tabiri/routes/route-names.dart';
 
@@ -18,10 +17,6 @@ class registrationService {
       'password': password.toString(),
     };
     final response = await api.post('registration.php', data);
-    print(response);
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('email', email);
-    // await prefs.setString('role', response['role']);
     Navigator.pushNamedAndRemoveUntil(context, RouteNames.login, (_) => false);
   }
 }
