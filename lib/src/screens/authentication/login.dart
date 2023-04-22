@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tabiri/routes/route-names.dart';
 import 'package:tabiri/src/service/login.dart';
 import 'package:tabiri/src/widgets/app_base_screen.dart';
@@ -7,6 +8,7 @@ import 'package:tabiri/src/widgets/app_button.dart';
 import 'package:tabiri/src/widgets/app_card.dart';
 import 'package:tabiri/src/widgets/app_container.dart';
 import 'package:tabiri/src/widgets/app_input_text.dart';
+import 'package:tabiri/src/widgets/app_snackbar.dart';
 import 'package:tabiri/src/widgets/app_text.dart';
 
 class Login extends StatefulWidget {
@@ -119,15 +121,29 @@ class _LoginState extends State<Login> {
                                     context,
                                     email.text.toString(),
                                     password.text.toString());
+                                AppSnackbar(
+                                  isError: response.toString() == 'success'
+                                      ? false
+                                      : true,
+                                  response: response.toString(),
+                                ).show(context);
+                                if (response.toString() == 'success') {
+                                  final prefs =
+                                      await SharedPreferences.getInstance();
+                                  await prefs.setString(
+                                      'email', email.text.toString());
+                                  if (response.toString() == 'success')
+                                    Navigator.pushNamedAndRemoveUntil(
+                                        context, RouteNames.home, (_) => false);
+                                }
+
                                 // handle successful login response
                               } catch (e) {
                                 // handle login error
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(e.toString()),
-                                    duration: Duration(seconds: 3),
-                                  ),
-                                );
+                                AppSnackbar(
+                                  isError: true,
+                                  response: e.toString(),
+                                ).show(context);
                               }
                             },
                             bcolor: HexColor('#e7d4d3'),

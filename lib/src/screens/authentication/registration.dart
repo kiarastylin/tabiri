@@ -170,11 +170,18 @@ class _RegistrationState extends State<Registration> {
                                     password.text,
                                     fullName.text,
                                     region.text);
-                                    AppSnackbar(isError: false, response: response.toString(),).show(context);                                // handle successful login response
+                                AppSnackbar(
+                                  isError: false,
+                                  response: response.toString(),
+                                ).show(
+                                    context); // handle successful login response
                                 Navigator.pushNamedAndRemoveUntil(
                                     context, RouteNames.login, (_) => false);
                               } catch (e) {
-                                AppSnackbar(isError: false, response: e.toString(),).show(context);
+                                AppSnackbar(
+                                  isError: true,
+                                  response: e.toString(),
+                                ).show(context);
                               }
                             },
                             bcolor: HexColor('#e7d4d3'),

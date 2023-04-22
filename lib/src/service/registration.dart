@@ -1,8 +1,7 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/material.dart';
-import 'package:tabiri/routes/route-names.dart';
 
-import '../connection/dio/api.dart';
+import '../connection/api.dart';
 
 class registrationService {
   static String baseUrl = dotenv.env['API_SERVER'] ?? 'http://noapi';
