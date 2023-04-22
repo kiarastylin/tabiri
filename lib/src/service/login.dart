@@ -16,15 +16,11 @@ class loginService {
       'email': email,
       'password': password,
     };
-    try {
       final response = await api.post('login', data);
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString('email', email);
       await prefs.setString('role', response['role']);
       Navigator.pushNamedAndRemoveUntil(
           context, RouteNames.home, (_) => false);
-    } catch (e) {
-      throw Exception('Failed to login');
-    }
   }
 }

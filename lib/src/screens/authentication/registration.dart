@@ -165,10 +165,10 @@ class _RegistrationState extends State<Registration> {
                               try {
                                 final response = await _apiService.registration(
                                     context,
-                                    email.text.toString(),
-                                    password.text.toString(),
-                                    fullName.text.toString(),
-                                    region.text.toString()
+                                    email.text,
+                                    password.text,
+                                    fullName.text,
+                                    region.text
                                     );
                                 // handle successful login response
                               } catch (e) {

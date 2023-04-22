@@ -1,30 +1,24 @@
 import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:dio/dio.dart';
+import 'package:http/http.dart' as http;
 
 class Api {
-  static  String baseUrl = dotenv.env['API_SERVER'] ?? 'http://noapi';
-
-  final Dio _dio = Dio(BaseOptions(
-    connectTimeout: Duration(seconds: 5000), //5s
-    receiveTimeout: Duration(seconds: 5000),
-    sendTimeout: Duration(seconds: 5000),
-  ));
-
-  // Throw an error if the response is not successful
-  void _handleError(Response response) {
-    if (response.statusCode != 200) {
-      throw Exception("Failed to fetch data");
-    }
-  }
+  static String baseUrl = dotenv.env['API_SERVER'] ?? 'http://noapi';
 
   // Check for internet connection
   Future<bool> hasInternetConnection() async {
     try {
-      Response response = await _dio.head(baseUrl);
+      final response = await http.head(Uri.parse(baseUrl));
       return response.statusCode == 200;
     } catch (e) {
       return false;
+    }
+  }
+
+  // Throw an error if the response is not successful
+  void _handleError(http.Response response) {
+    if (response.statusCode != 200) {
+      throw Exception("Failed to fetch data");
     }
   }
 
@@ -34,9 +28,11 @@ class Api {
       throw Exception("No internet connection");
     }
     try {
-      Response response = await _dio.get("$baseUrl/$endPoint");
+      final response = await http
+          .get(Uri.parse("$baseUrl/$endPoint"))
+          .timeout(Duration(seconds: 5));
       _handleError(response);
-      return json.decode(response.toString());
+      return json.decode(response.body);
     } catch (e) {
       throw Exception("Failed to fetch data");
     }
@@ -48,11 +44,16 @@ class Api {
       throw Exception("No internet connection");
     }
     try {
-      Response response = await _dio.post("$baseUrl/$endPoint", data: data);
+      final response = await http
+          .post(
+            Uri.parse('$baseUrl/$endPoint'),
+            body: data,
+          )
+          .timeout(Duration(seconds: 5));
       _handleError(response);
-      return json.decode(response.toString());
+      return json.decode(response.body);
     } catch (e) {
-      throw Exception("Failed to post data");
+      throw Exception(e.toString());
     }
   }
 
@@ -62,9 +63,11 @@ class Api {
       throw Exception("No internet connection");
     }
     try {
-      Response response = await _dio.put("$baseUrl/$endPoint", data: data);
+      final response = await http
+          .put(Uri.parse("$baseUrl/$endPoint"), body: data)
+          .timeout(Duration(seconds: 5));
       _handleError(response);
-      return json.decode(response.toString());
+      return json.decode(response.body);
     } catch (e) {
       throw Exception("Failed to update data");
     }
@@ -76,9 +79,11 @@ class Api {
       throw Exception("No internet connection");
     }
     try {
-      Response response = await _dio.delete("$baseUrl/$endPoint");
+      final response = await http
+          .delete(Uri.parse("$baseUrl/$endPoint"))
+          .timeout(Duration(seconds: 5));
       _handleError(response);
-      return json.decode(response.toString());
+      return json.decode(response.body);
     } catch (e) {
       throw Exception("Failed to delete data");
     }
