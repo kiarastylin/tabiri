@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
             ],
           ),
       debugShowCheckedModeBanner: false,
-      title: 'WGNRR',
+      title: 'Tabiri',
       theme: ThemeData(
           // timePickerTheme: Theme.of(context).primaryColor,
           cardColor: Colors.red.shade900,
