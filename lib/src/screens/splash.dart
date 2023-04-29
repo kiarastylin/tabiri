@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tabiri/routes/route-names.dart';
 import 'package:tabiri/src/screens/authentication/login.dart';
 
 class Splash extends StatefulWidget {
@@ -27,21 +28,24 @@ class _SplashState extends State<Splash> {
     await getValidationData().whenComplete(() async {
       await Future.delayed(Duration(seconds: 1), () {});
       if (username == null && status == null) {
-        Navigator.of(context)
-            .pushReplacement(MaterialPageRoute(builder: (context) => Login()));
+        Navigator.pushNamed(context, RouteNames.home);
+        // Navigator.of(context)
+        //     .pushReplacement(MaterialPageRoute(builder: (context) => Login()));
       } else if (username != null &&
           (status == 'client' ||
               status == 'Community Based Mobilizers' ||
               status == 'admin' ||
               status == 'super-admin') &&
           language != null) {
-        Navigator.of(context)
-            .pushReplacement(MaterialPageRoute(builder: (context) => Login()));
+            Navigator.pushNamed(context, RouteNames.home);
+        // Navigator.of(context)
+        //     .pushReplacement(MaterialPageRoute(builder: (context) => Login()));
       } else if (username != null &&
           status == 'Health Care Providers' &&
           language != null) {
-        Navigator.of(context)
-            .pushReplacement(MaterialPageRoute(builder: (context) => Login()));
+            Navigator.pushNamed(context, RouteNames.home);
+        // Navigator.of(context)
+        //     .pushReplacement(MaterialPageRoute(builder: (context) => Login()));
       }
     });
   }
