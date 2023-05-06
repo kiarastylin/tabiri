@@ -6,12 +6,14 @@ class AppBaseScreen extends StatelessWidget {
   final Widget? floatingAction;
   final bool? isLoading;
   final AppBar? appBar;
+  final Color? bgcolor;
   final EdgeInsetsGeometry? padding;
 
   const AppBaseScreen(
       {Key? key,
       required this.child,
       this.isLoading = false,
+      this.bgcolor,
       this.appBar,
       this.padding,
       this.floatingAction})
@@ -20,7 +22,7 @@ class AppBaseScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: HexColor('B22121'),
+      backgroundColor: bgcolor ?? HexColor('B22121'),
       appBar: appBar,
       body: SingleChildScrollView(
         child: Stack(
