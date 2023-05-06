@@ -13,6 +13,7 @@ class AppInputText extends StatelessWidget {
   final Function(String)? onChange;
   final bool isemail;
   final Color? labelColor;
+  final TextInputType? textinputtype;
   AppInputText({
     Key? key,
     required this.textfieldcontroller,
@@ -25,6 +26,7 @@ class AppInputText extends StatelessWidget {
     required this.obscure,
     this.validate,
     this.labelColor,
+    this.textinputtype,
   }) : super(key: key);
 
   @override
@@ -32,6 +34,7 @@ class AppInputText extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20),
       child: TextFormField(
+        keyboardType: textinputtype ?? TextInputType.text,
         onChanged: onChange,
         obscureText: obscure,
         obscuringCharacter: '*',
