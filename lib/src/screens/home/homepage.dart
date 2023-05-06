@@ -49,6 +49,13 @@ class _HomepageState extends State<Homepage> {
         ),
         child: Column(
           children: [
+            AppText(
+              txt:
+                  'Please note that any data entered during prediction may not be saved or used for any purposes. Additionally, the prediction made by this model is not guaranteed to be 100% accurate and should not be relied upon as a substitute for medical advice. If you are experiencing any symptoms or concerns, please consult a qualified medical professional. This model is intended to be used as a tool for informational purposes only, and is not a substitute for a professional medical diagnosis.',
+              size: 15,
+              color: AppConst.primary,
+              weight: FontWeight.w900,
+            ),
             SizedBox(
               height: 20,
             ),
