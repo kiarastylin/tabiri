@@ -27,7 +27,7 @@ class _SplashState extends State<Splash> {
     await getValidationData().whenComplete(() async {
       await Future.delayed(Duration(seconds: 1), () {});
       if (username == null && status == null) {
-        Navigator.pushNamed(context, RouteNames.home);
+        Navigator.pushNamed(context, RouteNames.login);
         // Navigator.of(context)
         //     .pushReplacement(MaterialPageRoute(builder: (context) => Login()));
       } else if (username != null &&
@@ -36,13 +36,13 @@ class _SplashState extends State<Splash> {
               status == 'admin' ||
               status == 'super-admin') &&
           language != null) {
-            Navigator.pushNamed(context, RouteNames.home);
+            Navigator.pushNamed(context, RouteNames.login);
         // Navigator.of(context)
         //     .pushReplacement(MaterialPageRoute(builder: (context) => Login()));
       } else if (username != null &&
           status == 'Health Care Providers' &&
           language != null) {
-            Navigator.pushNamed(context, RouteNames.home);
+            Navigator.pushNamed(context, RouteNames.login);
         // Navigator.of(context)
         //     .pushReplacement(MaterialPageRoute(builder: (context) => Login()));
       }
