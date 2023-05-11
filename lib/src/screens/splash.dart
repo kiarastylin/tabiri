@@ -48,7 +48,6 @@ class _SplashState extends State<Splash> {
       }
     });
   }
-
   Future getValidationData() async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
