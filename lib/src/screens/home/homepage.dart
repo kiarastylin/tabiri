@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:tabiri/routes/route-names.dart';
-import 'package:tabiri/src/service/data.dart';
-import 'package:tabiri/src/utils/app_const.dart';
-import 'package:tabiri/src/widgets/app_base_screen.dart';
-import 'package:tabiri/src/widgets/app_button.dart';
-import 'package:tabiri/src/widgets/app_dropdown.dart';
-import 'package:tabiri/src/widgets/app_input_text.dart';
-import 'package:tabiri/src/widgets/app_snackbar.dart';
-import 'package:tabiri/src/widgets/app_text.dart';
+import 'package:jiko_langu/routes/route-names.dart';
+import 'package:jiko_langu/src/service/data.dart';
+import 'package:jiko_langu/src/utils/app_const.dart';
+import 'package:jiko_langu/src/widgets/app_base_screen.dart';
+import 'package:jiko_langu/src/widgets/app_button.dart';
+import 'package:jiko_langu/src/widgets/app_dropdown.dart';
+import 'package:jiko_langu/src/widgets/app_input_text.dart';
+import 'package:jiko_langu/src/widgets/app_snackbar.dart';
+import 'package:jiko_langu/src/widgets/app_text.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -74,18 +74,19 @@ class _HomepageState extends State<Homepage> {
                   sex = newValue;
                 });
               },
-              options: ['Male', 'Female'],
-              value: sex,
+              options: ['Select sex','Male', 'Female'],
+              value: sex ?? 'Select sex',
             ),
             AppDropdownTextFormField(
               labelText: 'Chest pain type',
               options: [
+                'Chest pain',
                 'Asymptomatic',
                 'Atypical Angina',
                 'Non-aginal Pain',
                 'Typical Agina'
               ],
-              value: chestPain,
+              value: chestPain ?? 'Chest pain',
               onChanged: (newValue) {
                 setState(() {
                   chestPain = newValue;
@@ -111,10 +112,11 @@ class _HomepageState extends State<Homepage> {
             AppDropdownTextFormField(
               labelText: 'Fasting Blood Sugar',
               options: [
+                'Fasting Blood Sugar',
                 'Greater than 120mg/dl',
                 'Lower than 120mg/dl',
               ],
-              value: fastingBloodSugar,
+              value: fastingBloodSugar ?? 'Fasting Blood Sugar',
               onChanged: (newValue) {
                 setState(() {
                   fastingBloodSugar = newValue;
@@ -124,11 +126,12 @@ class _HomepageState extends State<Homepage> {
             AppDropdownTextFormField(
               labelText: 'Resting Electrocardiographic',
               options: [
+                'Resting Electrocardiographic',
                 'Showing probable or definite left ventricular hypertrophy by Estes\' criteria',
                 'Normal',
                 'Having ST-T wave abnormality(T wave inversion and/or ST elevation or depression of>0.05mV)',
               ],
-              value: Electrocardiographic,
+              value: Electrocardiographic ?? 'Resting Electrocardiographic',
               onChanged: (newValue) {
                 setState(() {
                   Electrocardiographic = newValue;
@@ -162,11 +165,12 @@ class _HomepageState extends State<Homepage> {
             AppDropdownTextFormField(
               labelText: 'Slope of peak exercise ST segment',
               options: [
+                'Slope of peak exercise',
                 'Downsloping',
                 'Flat',
                 'Upsloping',
               ],
-              value: slope,
+              value: slope ?? 'Slope of peak exercise',
               onChanged: (newValue) {
                 setState(() {
                   slope = newValue;
@@ -183,12 +187,13 @@ class _HomepageState extends State<Homepage> {
             AppDropdownTextFormField(
               labelText: 'A blood disorder called thalassemia',
               options: [
+                'Thalassemia',
                 'Null(dropped from dataset previously)',
                 'Fixed(No blood flow in some part of heart)',
                 'Normal blood flow',
                 'Reversible defect(a blood flow is observed but it is not normal)'
               ],
-              value: thalassemia,
+              value: thalassemia ?? 'Thalassemia',
               onChanged: (newValue) {
                 setState(() {
                   thalassemia = newValue;
@@ -198,10 +203,11 @@ class _HomepageState extends State<Homepage> {
             AppDropdownTextFormField(
               labelText: 'Heart disease',
               options: [
+                'Heart disease',
                 'Yes',
                 'No',
               ],
-              value: heartDisease,
+              value: heartDisease ?? 'Heart disease',
               onChanged: (newValue) {
                 setState(() {
                   heartDisease = newValue;
