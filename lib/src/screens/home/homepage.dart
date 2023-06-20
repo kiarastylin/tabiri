@@ -18,20 +18,22 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   final dataService _dataService = dataService();
-  TextEditingController age = TextEditingController();
-  TextEditingController restingBloodPressure = TextEditingController();
-  TextEditingController cholesterol = TextEditingController();
-  TextEditingController thalach = TextEditingController();
-  TextEditingController exang = TextEditingController();
-  TextEditingController oldPeak = TextEditingController();
-  TextEditingController majorVessel = TextEditingController();
-  var sex;
-  var chestPain;
-  var fastingBloodSugar;
-  var Electrocardiographic;
-  var slope;
-  var thalassemia;
-  var heartDisease;
+  TextEditingController BMI = TextEditingController();
+  TextEditingController PhysicalHealth = TextEditingController();
+  TextEditingController MentalHealth = TextEditingController();
+  TextEditingController SleepTime = TextEditingController();
+  var smoking, smokingValue;
+  var AlcoholDrinking, AlcoholDrinkingValue;
+  var Stroke, StrokeValue;
+  var DiffWalking, DiffWalkingValue;
+  var Sex, SexValue;
+  var AgeCategory, AgeCategoryValue;
+  var Race, RaceValue;
+  var PhysicalActivity, PhysicalActivityValue;
+  var GenHealth, GenHealthValue;
+  var Asthma, AsthmaValue;
+  var KidneyDisease, KidneyDiseaseValue;
+  var SkinCancer, SkinCancerValue;
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +53,7 @@ class _HomepageState extends State<Homepage> {
           children: [
             AppText(
               txt:
-                  'Please note that any data entered during prediction may not be saved or used for any purposes. Additionally, the prediction made by this model is not guaranteed to be 100% accurate and should not be relied upon as a substitute for medical advice. If you are experiencing any symptoms or concerns, please consult a qualified medical professional. This model is intended to be used as a tool for informational purposes only, and is not a substitute for a professional medical diagnosis.',
+                  'Data entered during prediction is not saved or used, and the accuracy of predictions cannot be guaranteed. This model should not replace medical advice. If you have symptoms or concerns, consult a qualified medical professional. This tool provides informational purposes only and does not substitute a professional medical diagnosis.',
               size: 15,
               color: AppConst.primary,
               weight: FontWeight.w900,
@@ -62,156 +64,279 @@ class _HomepageState extends State<Homepage> {
             AppInputText(
                 textinputtype: TextInputType.number,
                 labelColor: AppConst.secondary,
-                textfieldcontroller: age,
+                textfieldcontroller: BMI,
                 isemail: false,
                 fillcolor: AppConst.secondary,
-                label: 'Age',
+                label: 'Computed body mass index',
                 obscure: false),
             AppDropdownTextFormField(
-              labelText: 'Sex',
+              labelText: 'Smoked at least 100 cigarettes',
               onChanged: (newValue) {
                 setState(() {
-                  sex = newValue;
+                  smoking = newValue;
                 });
+                if (smoking == 'Yes') {
+                  setState(() {
+                    smokingValue = 1.toString();
+                  });
+                } else {
+                  setState(() {
+                    smokingValue = 0.toString();
+                  });
+                }
               },
-              options: ['Select sex','Male', 'Female'],
-              value: sex ?? 'Select sex',
+              options: ['Select', 'Yes', 'No'],
+              value: smoking ?? 'Select',
             ),
             AppDropdownTextFormField(
-              labelText: 'Chest pain type',
-              options: [
-                'Chest pain',
-                'Asymptomatic',
-                'Atypical Angina',
-                'Non-aginal Pain',
-                'Typical Agina'
-              ],
-              value: chestPain ?? 'Chest pain',
+              labelText: 'Heavy Alcohol Consumption Calculated Variable',
+              options: ['Select', 'Yes', 'No'],
+              value: AlcoholDrinking ?? 'Select',
               onChanged: (newValue) {
                 setState(() {
-                  chestPain = newValue;
+                  AlcoholDrinking = newValue;
                 });
+                if (smoking == 'Yes') {
+                  setState(() {
+                    AlcoholDrinkingValue = 1.toString();
+                  });
+                } else {
+                  setState(() {
+                    AlcoholDrinkingValue = 0.toString();
+                  });
+                }
+              },
+            ),
+            AppDropdownTextFormField(
+              labelText: 'Ever Diagnosed with a stroke?',
+              options: ['Select', 'Yes', 'No'],
+              value: Stroke ?? 'Select',
+              onChanged: (newValue) {
+                setState(() {
+                  Stroke = newValue;
+                });
+                if (smoking == 'Yes') {
+                  setState(() {
+                    StrokeValue = 1.toString();
+                  });
+                } else {
+                  setState(() {
+                    StrokeValue = 0.toString();
+                  });
+                }
               },
             ),
             AppInputText(
-                textfieldcontroller: restingBloodPressure,
+                textfieldcontroller: PhysicalHealth,
                 isemail: false,
                 textinputtype: TextInputType.number,
                 labelColor: AppConst.secondary,
                 fillcolor: AppConst.secondary,
-                label: 'Resting Blood Pressure(mmHg)',
+                label: 'Number of Days Physical Health Not Good',
                 obscure: false),
             AppInputText(
-                textfieldcontroller: cholesterol,
+                textfieldcontroller: MentalHealth,
                 isemail: false,
                 textinputtype: TextInputType.number,
                 labelColor: AppConst.secondary,
                 fillcolor: AppConst.secondary,
-                label: 'Cholesterol Measurement(mg/dl)',
+                label: 'Number of Days Mental Health Not Good',
                 obscure: false),
             AppDropdownTextFormField(
-              labelText: 'Fasting Blood Sugar',
+              labelText: 'Difficulty walking or Climbing stairs',
               options: [
-                'Fasting Blood Sugar',
-                'Greater than 120mg/dl',
-                'Lower than 120mg/dl',
-              ],
-              value: fastingBloodSugar ?? 'Fasting Blood Sugar',
-              onChanged: (newValue) {
-                setState(() {
-                  fastingBloodSugar = newValue;
-                });
-              },
-            ),
-            AppDropdownTextFormField(
-              labelText: 'Resting Electrocardiographic',
-              options: [
-                'Resting Electrocardiographic',
-                'Showing probable or definite left ventricular hypertrophy by Estes\' criteria',
-                'Normal',
-                'Having ST-T wave abnormality(T wave inversion and/or ST elevation or depression of>0.05mV)',
-              ],
-              value: Electrocardiographic ?? 'Resting Electrocardiographic',
-              onChanged: (newValue) {
-                setState(() {
-                  Electrocardiographic = newValue;
-                });
-              },
-            ),
-            AppInputText(
-              textfieldcontroller: thalach,
-              isemail: false,
-              fillcolor: AppConst.secondary,
-              label: 'The person\'s maximum heart rate achieved',
-              obscure: false,
-              labelColor: AppConst.secondary,
-            ),
-            AppInputText(
-              textfieldcontroller: exang,
-              isemail: false,
-              fillcolor: AppConst.secondary,
-              label: 'Exercise induced angina',
-              obscure: false,
-              labelColor: AppConst.secondary,
-            ),
-            AppInputText(
-              textfieldcontroller: oldPeak,
-              isemail: false,
-              fillcolor: AppConst.secondary,
-              label: 'St depression induced by exercise relative to rest',
-              obscure: false,
-              labelColor: AppConst.secondary,
-            ),
-            AppDropdownTextFormField(
-              labelText: 'Slope of peak exercise ST segment',
-              options: [
-                'Slope of peak exercise',
-                'Downsloping',
-                'Flat',
-                'Upsloping',
-              ],
-              value: slope ?? 'Slope of peak exercise',
-              onChanged: (newValue) {
-                setState(() {
-                  slope = newValue;
-                });
-              },
-            ),
-            AppInputText(
-                textfieldcontroller: majorVessel,
-                isemail: false,
-                labelColor: AppConst.secondary,
-                fillcolor: AppConst.secondary,
-                label: 'The number of major blood vessels',
-                obscure: false),
-            AppDropdownTextFormField(
-              labelText: 'A blood disorder called thalassemia',
-              options: [
-                'Thalassemia',
-                'Null(dropped from dataset previously)',
-                'Fixed(No blood flow in some part of heart)',
-                'Normal blood flow',
-                'Reversible defect(a blood flow is observed but it is not normal)'
-              ],
-              value: thalassemia ?? 'Thalassemia',
-              onChanged: (newValue) {
-                setState(() {
-                  thalassemia = newValue;
-                });
-              },
-            ),
-            AppDropdownTextFormField(
-              labelText: 'Heart disease',
-              options: [
-                'Heart disease',
+                'Select',
                 'Yes',
                 'No',
               ],
-              value: heartDisease ?? 'Heart disease',
+              value: DiffWalking ?? 'Select',
               onChanged: (newValue) {
                 setState(() {
-                  heartDisease = newValue;
+                  DiffWalking = newValue;
                 });
+                if (smoking == 'Yes') {
+                  setState(() {
+                    DiffWalkingValue = 1.toString();
+                  });
+                } else {
+                  setState(() {
+                    DiffWalkingValue = 0.toString();
+                  });
+                }
+              },
+            ),
+            AppDropdownTextFormField(
+              labelText: 'Are you male or female?',
+              options: [
+                'Select',
+                'Male',
+                'Female',
+              ],
+              value: Sex ?? 'Select',
+              onChanged: (newValue) {
+                setState(() {
+                  Sex = newValue;
+                });
+              },
+            ),
+            AppDropdownTextFormField(
+              labelText: 'Reported age in five -year age categories ',
+              options: [
+                'Select',
+                '18-24',
+                '25-29',
+                '30-34',
+                '35-39',
+                '40-44',
+                '45-49',
+                '50-54',
+                '55-59',
+                '60-64',
+                '65-69',
+                '70-74',
+                '75-79',
+                '80+'
+              ],
+              value: AgeCategory ?? 'Select',
+              onChanged: (newValue) {
+                setState(() {
+                  AgeCategory = newValue;
+                });
+              },
+            ),
+            AppDropdownTextFormField(
+              labelText: 'Imputed race / ethnicity value',
+              options: [
+                'Select',
+                'White',
+                'Black',
+                'Asian',
+                'American Indian/Alaskan Native',
+                'Hispanic',
+                'Other'
+              ],
+              value: Race ?? 'Select',
+              onChanged: (newValue) {
+                setState(() {
+                  Race = newValue;
+                });
+              },
+            ),
+            AppDropdownTextFormField(
+              labelText: 'Exercise in past 30 days',
+              options: [
+                'Select',
+                'Yes',
+                'No',
+              ],
+              value: PhysicalActivity ?? 'Select',
+              onChanged: (newValue) {
+                setState(() {
+                  PhysicalActivity = newValue;
+                });
+                if (smoking == 'Yes') {
+                  setState(() {
+                    PhysicalActivityValue = 1.toString();
+                  });
+                } else {
+                  setState(() {
+                    PhysicalActivityValue = 0.toString();
+                  });
+                }
+              },
+            ),
+            AppDropdownTextFormField(
+              labelText: 'General Health',
+              options: [
+                'Select',
+                'Excellent',
+                'Very good',
+                'Good',
+                'Fair',
+                'Poor'
+              ],
+              value: GenHealth ?? 'Select',
+              onChanged: (newValue) {
+                setState(() {
+                  GenHealth = newValue;
+                });
+              },
+            ),
+            AppInputText(
+                textfieldcontroller: SleepTime,
+                isemail: false,
+                textinputtype: TextInputType.number,
+                labelColor: AppConst.secondary,
+                fillcolor: AppConst.secondary,
+                label: 'How much time do you sleep?',
+                obscure: false),
+            AppDropdownTextFormField(
+              labelText: 'Ever told you had asthma?',
+              options: [
+                'Select',
+                'Yes',
+                'No',
+              ],
+              value: Asthma ?? 'Select',
+              onChanged: (newValue) {
+                setState(() {
+                  Asthma = newValue;
+                });
+                if (smoking == 'Yes') {
+                  setState(() {
+                    AsthmaValue = 1.toString();
+                  });
+                } else {
+                  setState(() {
+                    Asthma = 0.toString();
+                  });
+                }
+              },
+            ),
+            AppDropdownTextFormField(
+              labelText: 'Ever told you have kidney disease?',
+              options: [
+                'Select',
+                'Yes',
+                'No',
+              ],
+              value: KidneyDisease ?? 'Select',
+              onChanged: (newValue) {
+                setState(() {
+                  KidneyDisease = newValue;
+                });
+                if (smoking == 'Yes') {
+                  setState(() {
+                    KidneyDiseaseValue = 1.toString();
+                  });
+                } else {
+                  setState(() {
+                    KidneyDiseaseValue = 0.toString();
+                  });
+                }
+              },
+            ),
+            AppDropdownTextFormField(
+              labelText: '(Ever told) you had skin cancer?',
+              options: [
+                'Select',
+                'Yes',
+                'No',
+              ],
+              value: SkinCancer ?? 'Select',
+              onChanged: (newValue) {
+                setState(() {
+                  SkinCancer = newValue;
+                });
+                if (smoking == 'Yes') {
+                  setState(() {
+                    SkinCancerValue = 1.toString();
+                  });
+                } else {
+                  setState(() {
+                    SkinCancerValue = 0.toString();
+                  });
+                }
               },
             ),
             Container(
