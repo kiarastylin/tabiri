@@ -11,13 +11,14 @@ class Api {
       final response = await http.head(Uri.parse(baseUrl));
       return response.statusCode == 200;
     } catch (e) {
-     throw Exception("Check your internet connection");
+      throw Exception("Check your internet connection");
     }
   }
 
   // Throw an error if the response is not successful
   void _handleError(http.Response response) {
     if (response.statusCode != 200) {
+      print(response.statusCode);
       throw Exception("Failed to fetch data");
     }
   }
@@ -40,9 +41,9 @@ class Api {
 
   // POST Request
   Future<dynamic> post(String endPoint, Map<String, dynamic> data) async {
-    if (!(await hasInternetConnection())) {
-      throw Exception("No internet connection");
-    }
+    // if (!(await hasInternetConnection())) {
+    //   throw Exception("No internet connection");
+    // }
     try {
       final response = await http
           .post(
@@ -51,6 +52,7 @@ class Api {
           )
           .timeout(Duration(seconds: 5));
       _handleError(response);
+      print(response.statusCode);
       return json.decode(response.body);
     } catch (e) {
       throw Exception(e.toString());

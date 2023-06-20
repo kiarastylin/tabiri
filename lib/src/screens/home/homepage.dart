@@ -53,7 +53,7 @@ class _HomepageState extends State<Homepage> {
           children: [
             AppText(
               txt:
-                  'Data entered during prediction is not saved or used, and the accuracy of predictions cannot be guaranteed. This model should not replace medical advice. If you have symptoms or concerns, consult a qualified medical professional. This tool provides informational purposes only and does not substitute a professional medical diagnosis.',
+                  'Data not saved or used. Predictions not guaranteed. Not medical advice. Consult professional for concerns. Informational purposes only, not a medical diagnosis.',
               size: 15,
               color: AppConst.primary,
               weight: FontWeight.w900,
@@ -89,14 +89,14 @@ class _HomepageState extends State<Homepage> {
               value: smoking ?? 'Select',
             ),
             AppDropdownTextFormField(
-              labelText: 'Heavy Alcohol Consumption Calculated Variable',
+              labelText: 'Heavy Alcohol Consumption',
               options: ['Select', 'Yes', 'No'],
               value: AlcoholDrinking ?? 'Select',
               onChanged: (newValue) {
                 setState(() {
                   AlcoholDrinking = newValue;
                 });
-                if (smoking == 'Yes') {
+                if (AlcoholDrinking == 'Yes') {
                   setState(() {
                     AlcoholDrinkingValue = 1.toString();
                   });
@@ -115,7 +115,7 @@ class _HomepageState extends State<Homepage> {
                 setState(() {
                   Stroke = newValue;
                 });
-                if (smoking == 'Yes') {
+                if (Stroke == 'Yes') {
                   setState(() {
                     StrokeValue = 1.toString();
                   });
@@ -154,7 +154,7 @@ class _HomepageState extends State<Homepage> {
                 setState(() {
                   DiffWalking = newValue;
                 });
-                if (smoking == 'Yes') {
+                if (DiffWalking == 'Yes') {
                   setState(() {
                     DiffWalkingValue = 1.toString();
                   });
@@ -177,6 +177,15 @@ class _HomepageState extends State<Homepage> {
                 setState(() {
                   Sex = newValue;
                 });
+                if (Sex == 'Male') {
+                  setState(() {
+                    SexValue = 1.toString();
+                  });
+                } else {
+                  setState(() {
+                    SexValue = 0.toString();
+                  });
+                }
               },
             ),
             AppDropdownTextFormField(
@@ -202,6 +211,39 @@ class _HomepageState extends State<Homepage> {
                 setState(() {
                   AgeCategory = newValue;
                 });
+                if (AgeCategory == '18-24') {
+                  setState(() {
+                    AgeCategoryValue = 0.toString();
+                  });
+                } else if (AgeCategory == '25-29') {
+                  AgeCategoryValue = 1.toString();
+                } else if (AgeCategory == '30-34') {
+                  AgeCategoryValue = 2.toString();
+                } else if (AgeCategory == '35-39') {
+                  AgeCategoryValue = 3.toString();
+                } else if (AgeCategory == '40-44') {
+                  AgeCategoryValue = 4.toString();
+                } else if (AgeCategory == '45-49') {
+                  AgeCategoryValue = 5.toString();
+                } else if (AgeCategory == '50-54') {
+                  AgeCategoryValue = 6.toString();
+                } else if (AgeCategory == '55-59') {
+                  AgeCategoryValue = 7.toString();
+                } else if (AgeCategory == '60-64') {
+                  AgeCategoryValue = 8.toString();
+                } else if (AgeCategory == '65-69') {
+                  AgeCategoryValue = 9.toString();
+                } else if (AgeCategory == '70-74') {
+                  AgeCategoryValue = 9.toString();
+                } else if (AgeCategory == '75-79') {
+                  AgeCategoryValue = 10.toString();
+                } else if (AgeCategory == '80+') {
+                  AgeCategoryValue = 11.toString();
+                } else {
+                  setState(() {
+                    AgeCategoryValue = 0.toString();
+                  });
+                }
               },
             ),
             AppDropdownTextFormField(
@@ -220,6 +262,31 @@ class _HomepageState extends State<Homepage> {
                 setState(() {
                   Race = newValue;
                 });
+                if (Race == 'White') {
+                  setState(() {
+                    RaceValue = 5.toString();
+                  });
+                } else if (Race == 'Black') {
+                  setState(() {
+                    RaceValue = 4.toString();
+                  });
+                } else if (Race == 'Asian') {
+                  setState(() {
+                    RaceValue = 3.toString();
+                  });
+                } else if (Race == 'American Indian/Alaskan Native') {
+                  setState(() {
+                    RaceValue = 2.toString();
+                  });
+                } else if (Race == 'Hispanic') {
+                  setState(() {
+                    RaceValue = 1.toString();
+                  });
+                } else {
+                  setState(() {
+                    RaceValue = 0.toString();
+                  });
+                }
               },
             ),
             AppDropdownTextFormField(
@@ -260,6 +327,27 @@ class _HomepageState extends State<Homepage> {
                 setState(() {
                   GenHealth = newValue;
                 });
+                if (GenHealth == 'Excellent') {
+                  setState(() {
+                    GenHealthValue = 4.toString();
+                  });
+                } else if (GenHealth == 'Very good') {
+                  setState(() {
+                    GenHealthValue = 3.toString();
+                  });
+                } else if (GenHealth == 'Good') {
+                  setState(() {
+                    GenHealthValue = 2.toString();
+                  });
+                } else if (GenHealth == 'Fair') {
+                  setState(() {
+                    GenHealthValue = 1.toString();
+                  });
+                } else {
+                  setState(() {
+                    GenHealthValue = 0.toString();
+                  });
+                }
               },
             ),
             AppInputText(
@@ -344,9 +432,25 @@ class _HomepageState extends State<Homepage> {
               height: 50,
               child: AppButton(
                   onPress: () async {
-                    Navigator.pushNamed(context, RouteNames.results);
                     try {
-                      final response = await _dataService.login(context);
+                      final response = await _dataService.sendData(
+                          context,
+                          BMI.text.toString(),
+                          PhysicalHealth.text.toString(),
+                          MentalHealth.text.toString(),
+                          SleepTime.text.toString(),
+                          smokingValue,
+                          AlcoholDrinkingValue,
+                          StrokeValue,
+                          DiffWalkingValue,
+                          SexValue,
+                          AgeCategoryValue,
+                          RaceValue,
+                          PhysicalActivityValue,
+                          GenHealthValue,
+                          AsthmaValue,
+                          KidneyDiseaseValue,
+                          SkinCancerValue);
                       AppSnackbar(
                         isError:
                             response.toString() == 'success' ? false : true,
