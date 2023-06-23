@@ -29,6 +29,7 @@ class _HomepageState extends State<Homepage> {
   var Sex, SexValue;
   var AgeCategory, AgeCategoryValue;
   var Race, RaceValue;
+  var Diabetic, DiabeticValue;
   var PhysicalActivity, PhysicalActivityValue;
   var GenHealth, GenHealthValue;
   var Asthma, AsthmaValue;
@@ -290,6 +291,25 @@ class _HomepageState extends State<Homepage> {
               },
             ),
             AppDropdownTextFormField(
+              labelText: 'Ever had Diabetes?',
+              options: ['Select', 'Yes', 'No'],
+              value: Diabetic ?? 'Select',
+              onChanged: (newValue) {
+                setState(() {
+                  Diabetic = newValue;
+                });
+                if (Diabetic == 'Yes') {
+                  setState(() {
+                    DiabeticValue = 2.toString();
+                  });
+                } else {
+                  setState(() {
+                    DiabeticValue = 0.toString();
+                  });
+                }
+              },
+            ),
+            AppDropdownTextFormField(
               labelText: 'Exercise in past 30 days',
               options: [
                 'Select',
@@ -446,6 +466,7 @@ class _HomepageState extends State<Homepage> {
                           SexValue,
                           AgeCategoryValue,
                           RaceValue,
+                          DiabeticValue,
                           PhysicalActivityValue,
                           GenHealthValue,
                           AsthmaValue,
