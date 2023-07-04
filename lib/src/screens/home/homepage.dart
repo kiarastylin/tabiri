@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:tabiri/routes/route-names.dart';
 import 'package:tabiri/src/service/data.dart';
@@ -22,7 +24,7 @@ class _HomepageState extends State<Homepage> {
   TextEditingController PhysicalHealth = TextEditingController();
   TextEditingController MentalHealth = TextEditingController();
   TextEditingController SleepTime = TextEditingController();
-  var smoking, smokingValue;
+  var Smoking, SmokingValue;
   var AlcoholDrinking, AlcoholDrinkingValue;
   var Stroke, StrokeValue;
   var DiffWalking, DiffWalkingValue;
@@ -74,20 +76,20 @@ class _HomepageState extends State<Homepage> {
               labelText: 'Smoked at least 100 cigarettes',
               onChanged: (newValue) {
                 setState(() {
-                  smoking = newValue;
+                  Smoking = newValue;
                 });
-                if (smoking == 'Yes') {
+                if (Smoking == 'Yes') {
                   setState(() {
-                    smokingValue = 1.toString();
+                    SmokingValue = 1.toString();
                   });
                 } else {
                   setState(() {
-                    smokingValue = 0.toString();
+                    SmokingValue = 0.toString();
                   });
                 }
               },
               options: ['Select', 'Yes', 'No'],
-              value: smoking ?? 'Select',
+              value: Smoking ?? 'Select',
             ),
             AppDropdownTextFormField(
               labelText: 'Heavy Alcohol Consumption',
@@ -321,7 +323,7 @@ class _HomepageState extends State<Homepage> {
                 setState(() {
                   PhysicalActivity = newValue;
                 });
-                if (smoking == 'Yes') {
+                if (PhysicalActivity == 'Yes') {
                   setState(() {
                     PhysicalActivityValue = 1.toString();
                   });
@@ -390,13 +392,13 @@ class _HomepageState extends State<Homepage> {
                 setState(() {
                   Asthma = newValue;
                 });
-                if (smoking == 'Yes') {
+                if (Asthma == 'Yes') {
                   setState(() {
                     AsthmaValue = 1.toString();
                   });
                 } else {
                   setState(() {
-                    Asthma = 0.toString();
+                    AsthmaValue = 0.toString();
                   });
                 }
               },
@@ -413,7 +415,7 @@ class _HomepageState extends State<Homepage> {
                 setState(() {
                   KidneyDisease = newValue;
                 });
-                if (smoking == 'Yes') {
+                if (KidneyDisease == 'Yes') {
                   setState(() {
                     KidneyDiseaseValue = 1.toString();
                   });
@@ -436,7 +438,7 @@ class _HomepageState extends State<Homepage> {
                 setState(() {
                   SkinCancer = newValue;
                 });
-                if (smoking == 'Yes') {
+                if (SkinCancer == 'Yes') {
                   setState(() {
                     SkinCancerValue = 1.toString();
                   });
@@ -453,13 +455,14 @@ class _HomepageState extends State<Homepage> {
               child: AppButton(
                   onPress: () async {
                     try {
+                      // print(_dataService)
                       final response = await _dataService.sendData(
                           context,
                           BMI.text.toString(),
                           PhysicalHealth.text.toString(),
                           MentalHealth.text.toString(),
                           SleepTime.text.toString(),
-                          smokingValue,
+                          SmokingValue,
                           AlcoholDrinkingValue,
                           StrokeValue,
                           DiffWalkingValue,
@@ -472,13 +475,16 @@ class _HomepageState extends State<Homepage> {
                           AsthmaValue,
                           KidneyDiseaseValue,
                           SkinCancerValue);
-                      AppSnackbar(
-                        isError:
-                            response.toString() == 'success' ? false : true,
-                        response: response.toString(),
-                      ).show(context);
+                      Navigator.pushNamed(context, RouteNames.results,
+                          arguments: response);
+                      // AppSnackbar(
+                      //   isError:
+                      //       response.toString() == 'success' ? false : true,
+                      //   response: response.toString(),
+                      // ).show(context);
                     } catch (e) {
                       // handle login error
+                      print("Error occured");
                       AppSnackbar(
                         isError: true,
                         response: e.toString(),

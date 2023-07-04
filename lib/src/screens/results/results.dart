@@ -13,9 +13,12 @@ class results extends StatefulWidget {
 class _resultsState extends State<results> {
   @override
   Widget build(BuildContext context) {
+    final rcvdData =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    print(rcvdData['message']);
     return AppBaseScreen(
         appBar: AppBar(
-          automaticallyImplyLeading: false,
+          automaticallyImplyLeading: true,
           backgroundColor: AppConst.primary,
           centerTitle: true,
           title: AppText(
@@ -60,8 +63,7 @@ class _resultsState extends State<results> {
                     Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: AppText(
-                        txt:
-                            'The result of the prediction indicates that you are at risk of heart disease and should seek medical attention !',
+                        txt: rcvdData['message'],
                         size: 15,
                         color: AppConst.secondary,
                         weight: FontWeight.w900,

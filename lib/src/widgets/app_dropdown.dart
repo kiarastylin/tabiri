@@ -48,7 +48,7 @@ class AppDropdownTextFormField extends StatelessWidget {
                   ...options.map((String option) {
                     return DropdownMenuItem<String>(
                       value: option,
-                      child: Text(option),
+                      child: Expanded(child: Text(option)),
                     );
                   }).toList(),
                 ],

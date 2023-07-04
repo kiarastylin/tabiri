@@ -3,7 +3,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 class Api {
-  static String baseUrl = dotenv.env['API_SERVER'] ?? 'http://noapi';
+  // static String baseUrl = dotenv.env['API_SERVER'] ?? 'http://noapi';
+  static String baseUrl = "http://172.20.10.2:8000/predict";
 
   // Check for internet connection
   Future<bool> hasInternetConnection() async {
@@ -44,17 +45,20 @@ class Api {
     // if (!(await hasInternetConnection())) {
     //   throw Exception("No internet connection");
     // }
+    print(baseUrl);
     try {
       final response = await http
           .post(
             Uri.parse('$baseUrl/$endPoint'),
-            body: data,
+            headers: {'Content-Type': "application/json"},
+            body: jsonEncode(data),
           )
           .timeout(Duration(seconds: 5));
       _handleError(response);
       print(response.statusCode);
       return json.decode(response.body);
     } catch (e) {
+      print(e.toString());
       throw Exception(e.toString());
     }
   }

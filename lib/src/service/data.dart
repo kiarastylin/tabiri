@@ -1,21 +1,21 @@
+import 'dart:developer';
+
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/material.dart';
 
 import '../connection/api.dart';
 
 class dataService {
-  static String baseUrl = dotenv.env['API_SERVER'] ?? 'http://noapi';
+  // static String baseUrl = dotenv.env['API_SERVER'] ?? 'http://noapi';
   Api api = Api();
-
   Future sendData(
     BuildContext context,
     String BMI,
-    String PhysicalHealth,
-    String MentalHealth,
-    String SleepTime,
-    String smokingValue,
+    String SmokingValue,
     String AlcoholDrinkingValue,
     String StrokeValue,
+    String PhysicalHealth,
+    String MentalHealth,
     String DiffWalkingValue,
     String SexValue,
     String AgeCategoryValue,
@@ -23,30 +23,34 @@ class dataService {
     String DiabeticValue,
     String PhysicalActivityValue,
     String GenHealthValue,
+    String SleepTime,
     String AsthmaValue,
     String KidneyDiseaseValue,
     String SkinCancerValue,
   ) async {
+    // print(baseUrl);
+    print("Error occured");
     Map<String, dynamic> data = {
-      'BMI': BMI.toString(),
-      'PhysicalHealth': PhysicalHealth.toString(),
-      'MentalHealth': MentalHealth.toString(),
-      'SleepTime': SleepTime.toString(),
-      'smokingValue': smokingValue.toString(),
-      'AlcoholDrinkingValue': AlcoholDrinkingValue.toString(),
-      'StrokeValue': StrokeValue.toString(),
-      'DiffWalkingValue': DiffWalkingValue.toString(),
-      'SexValue': SexValue.toString(),
-      'AgeCategoryValue': AgeCategoryValue.toString(),
-      'RaceValue': RaceValue.toString(),
-      'DiabeticValue': DiabeticValue.toString(),
-      'PhysicalActivityValue': PhysicalActivityValue.toString(),
-      'GenHealthValue': GenHealthValue.toString(),
-      'AsthmaValue': AsthmaValue.toString(),
-      'KidneyDiseaseValue': SkinCancerValue.toString(),
-      'SkinCancerValue': SkinCancerValue.toString(),
+      'BMI': int.parse(BMI),
+      'Smoking': int.parse(SmokingValue),
+      'AlcoholDrinking': int.parse(AlcoholDrinkingValue),
+      'Stroke': int.parse(StrokeValue),
+      'PhysicalHealth': int.parse(PhysicalHealth),
+      'MentalHealth': int.parse(MentalHealth),
+      'DiffWalking': int.parse(DiffWalkingValue),
+      'Sex': int.parse(SexValue),
+      'AgeCategory': int.parse(AgeCategoryValue),
+      'Race': int.parse(RaceValue),
+      'Diabetic': int.parse(DiabeticValue),
+      'PhysicalActivity': int.parse(PhysicalActivityValue),
+      'GenHealth': int.parse(GenHealthValue),
+      'SleepTime': int.parse(SleepTime),
+      'Asthma': int.parse(AsthmaValue),
+      'KidneyDisease': int.parse(SkinCancerValue),
+      'SkinCancer': int.parse(SkinCancerValue),
     };
-    final response = await api.post('app.py', data);
+    final response = await api.post('', {'data': data});
+    print(response);
     return response;
   }
 }
