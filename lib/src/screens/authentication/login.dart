@@ -116,8 +116,6 @@ class _LoginState extends State<Login> {
                           child: AppButton(
                             label: 'LOGIN',
                             onPress: () async {
-                              Navigator.pushNamedAndRemoveUntil(
-                                        context, RouteNames.home, (_) => false);
                               try {
                                 final response = await _apiService.login(
                                     context,

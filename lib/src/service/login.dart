@@ -13,7 +13,7 @@ class loginService {
       'password': password,
     };
 
-    final response = await api.post('login.php', data);
+    final response = await api.postAuth(context, 'login.php', data);
     return response;
   }
 }
