@@ -21,9 +21,8 @@ class _RegistrationState extends State<Registration> {
   final registrationService _apiService = registrationService();
   TextEditingController fullName = TextEditingController();
   TextEditingController email = TextEditingController();
-  TextEditingController region = TextEditingController();
   TextEditingController password = TextEditingController();
-  TextEditingController rpassword = TextEditingController();
+  TextEditingController phone = TextEditingController();
   bool dont_show_password = true;
   final _formKey = GlobalKey<FormState>();
   @override
@@ -98,6 +97,20 @@ class _RegistrationState extends State<Registration> {
                             width: 340,
                             bottom: 24,
                             child: AppInputText(
+                              textfieldcontroller: phone,
+                              icon: Icon(
+                                Icons.phone,
+                                color: Colors.black,
+                              ),
+                              label: 'Phone',
+                              obscure: false,
+                              isemail: false,
+                              fillcolor: HexColor('e7d4d3'),
+                            )),
+                        AppContainer(
+                            width: 340,
+                            bottom: 24,
+                            child: AppInputText(
                               textfieldcontroller: password,
                               icon: Icon(
                                 Icons.lock,
@@ -116,48 +129,6 @@ class _RegistrationState extends State<Registration> {
                               fillcolor: HexColor('e7d4d3'),
                             )),
                         AppContainer(
-                            width: 340,
-                            bottom: 24,
-                            child: AppInputText(
-                              onChange: (p0) {
-                                if (p0 != password.text) {
-                                  return "Passwords do not match";
-                                } else {
-                                  return null;
-                                }
-                              },
-                              textfieldcontroller: rpassword,
-                              icon: Icon(
-                                Icons.lock,
-                                color: Colors.black,
-                              ),
-                              label: 'Re-enter Password',
-                              obscure: dont_show_password,
-                              suffixicon: IconButton(
-                                  onPressed: (() {
-                                    setState(() {
-                                      dont_show_password = !dont_show_password;
-                                    });
-                                  }),
-                                  icon: Icon(Icons.remove_red_eye)),
-                              isemail: false,
-                              fillcolor: HexColor('e7d4d3'),
-                            )),
-                        AppContainer(
-                            width: 340,
-                            bottom: 0,
-                            child: AppInputText(
-                              textfieldcontroller: region,
-                              icon: Icon(
-                                Icons.mail,
-                                color: Colors.black,
-                              ),
-                              label: 'Region of Residence',
-                              obscure: false,
-                              isemail: false,
-                              fillcolor: HexColor('e7d4d3'),
-                            )),
-                        AppContainer(
                           width: 140,
                           bottom: 24,
                           child: AppButton(
@@ -169,7 +140,7 @@ class _RegistrationState extends State<Registration> {
                                     email.text,
                                     password.text,
                                     fullName.text,
-                                    region.text);
+                                    phone.text);
                                 AppSnackbar(
                                   isError: false,
                                   response: response.toString(),
