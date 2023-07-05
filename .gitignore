@@ -45,4 +45,3 @@ app.*.map.json
 .idea
 .dart_tool
 build
-.env
