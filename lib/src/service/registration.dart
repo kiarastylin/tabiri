@@ -13,7 +13,8 @@ class registrationService {
       'password': password.toString(),
       'phone': phone.toString(),
     };
-    final response = await api.postAuth('auth/registration.php', data);
+    print(data);
+    final response = await api.postAuth(context, 'auth/registration.php', data);
     return response;
   }
 }

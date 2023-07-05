@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:tabiri/src/widgets/app_snackbar.dart';
 
 class Api {
   static String baseUrl = dotenv.env['API_SERVER'] ?? 'http://noapi';
@@ -61,25 +63,28 @@ class Api {
     }
   }
 
-  Future<dynamic> postAuth(String endPoint, Map<String, dynamic> data) async {
+  // POST Request
+  Future<dynamic> postAuth(BuildContext context, String endPoint, Map<String, dynamic> data) async {
     // if (!(await hasInternetConnection())) {
     //   throw Exception("No internet connection");
-    // }
+    // } else {
     try {
       final response = await http
           .post(
-            Uri.parse('$baseUrl/$endPoint'),
-            headers: {'Content-Type': "application/json"},
-            body: jsonEncode(data),
+            Uri.parse('$authUrl/$endPoint'),
+            body: data,
           )
-          .timeout(Duration(seconds: 5));
+          .timeout(Duration(seconds: 10));
       _handleError(response);
-      print(response.statusCode);
       return json.decode(response.body);
     } catch (e) {
-      print(e.toString());
+      AppSnackbar(
+        isError: true,
+        response: e.toString(),
+      ).show(context);
       throw Exception(e.toString());
     }
+    // }
   }
 
   // PUT Request
