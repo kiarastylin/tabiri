@@ -20,44 +20,23 @@ class _SplashState extends State<Splash> {
     _navigatortohome();
   }
 
-  var username;
-  var status;
-  var language;
+  var email;
   _navigatortohome() async {
     await getValidationData().whenComplete(() async {
       await Future.delayed(Duration(seconds: 1), () {});
-      if (username == null && status == null) {
+      if (email == null) {
         Navigator.pushNamed(context, RouteNames.login);
-        // Navigator.of(context)
-        //     .pushReplacement(MaterialPageRoute(builder: (context) => Login()));
-      } else if (username != null &&
-          (status == 'client' ||
-              status == 'Community Based Mobilizers' ||
-              status == 'admin' ||
-              status == 'super-admin') &&
-          language != null) {
-            Navigator.pushNamed(context, RouteNames.login);
-        // Navigator.of(context)
-        //     .pushReplacement(MaterialPageRoute(builder: (context) => Login()));
-      } else if (username != null &&
-          status == 'Health Care Providers' &&
-          language != null) {
-            Navigator.pushNamed(context, RouteNames.login);
-        // Navigator.of(context)
-        //     .pushReplacement(MaterialPageRoute(builder: (context) => Login()));
-      }
+      } else if (email != null) {
+            Navigator.pushNamed(context, RouteNames.home);
+      } 
     });
   }
   Future getValidationData() async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
-    var u = sharedPreferences.get('username');
-    var l = sharedPreferences.get('language');
-    var s = sharedPreferences.get('status');
+    var e = sharedPreferences.get('email');
     setState(() {
-      language = l;
-      username = u;
-      status = s;
+      email = e;
     });
   }
 
